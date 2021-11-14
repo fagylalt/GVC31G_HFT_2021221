@@ -39,7 +39,9 @@ namespace GVC31G_HFT_2021221.Repository
 
         public void Update(Assignment assignment)
         {
-            throw new NotImplementedException();
+            var oldAssignment = Read(assignment.Id);
+            oldAssignment = assignment;
+            db.SaveChanges();
         }
     }
 }
