@@ -6,7 +6,7 @@ namespace GVC31G_HFT_2021221.Data
 {
     public class TrainDbContext : DbContext
     {
-        public virtual DbSet<Manager> Manager { get; set; }
+        public virtual DbSet<Manager> Managers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Assignment> Assignments { get; set; }
         public TrainDbContext()

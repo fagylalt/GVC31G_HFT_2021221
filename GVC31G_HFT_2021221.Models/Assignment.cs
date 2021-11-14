@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GVC31G_HFT_2021221.Models
 {
-    [Table("assignment")]
+    [Table("assignments")]
     public class Assignment
     {
         

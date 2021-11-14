@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GVC31G_HFT_2021221.Models
 {
+    [Table("employees")]
     public class Employee
     {
         [Key]
