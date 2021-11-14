@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GVC31G_HFT_2021221.Repository
 {
-    class ManagerRepository : IManagerRepository
+    public class ManagerRepository : IManagerRepository
     {
         TrainDbContext db;
         public ManagerRepository(TrainDbContext db)
