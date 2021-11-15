@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GVC31G_HFT_2021221.Logic
 {
-    interface IManagerLogic
+    public interface IManagerLogic
     {
         double AVGEmployees();
         void Create(Manager manager);

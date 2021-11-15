@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace GVC31G_HFT_2021221.Models
 {
@@ -14,6 +15,7 @@ namespace GVC31G_HFT_2021221.Models
         [MaxLength(100)]
         public string Name { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public virtual Manager Manager { get; set; }
         [ForeignKey(nameof(Manager))]
         public int ManagerId { get; set; }

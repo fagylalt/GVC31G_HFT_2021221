@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GVC31G_HFT_2021221.Logic
 {
-    class AssignmentLogic : IAssignmentLogic
+    public class AssignmentLogic : IAssignmentLogic
     {
         IAssignmentRepository assignmentRepo;
         public AssignmentLogic(IAssignmentRepository repo)
