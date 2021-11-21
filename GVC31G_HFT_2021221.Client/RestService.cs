@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarDB.Client
+namespace GVC31G_HFT_2021221
 {
 
     // https://users.nik.uni-obuda.hu/kovacs.andras/hft/RestService.cs
