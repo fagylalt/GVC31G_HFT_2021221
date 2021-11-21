@@ -14,5 +14,6 @@ namespace GVC31G_HFT_2021221.Logic
         Employee Read(int id);
         IEnumerable<Employee> ReadAll();
         void Update(Employee Employee);
+        bool DoesEmployeeHasManager(Employee Employee);
     }
 }

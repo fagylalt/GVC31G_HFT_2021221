@@ -2,9 +2,6 @@
 using GVC31G_HFT_2021221.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GVC31G_HFT_2021221.Logic
 {
@@ -39,6 +36,17 @@ namespace GVC31G_HFT_2021221.Logic
         public void Update(Employee Employee)
         {
             repo.Update(Employee);
+        } 
+        public bool DoesEmployeeHasManager(Employee Employee)
+        {
+            if(Employee.Manager == null)
+            {
+                throw new ArgumentNullException($"{Employee.Name} does not have a manager");
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

@@ -45,7 +45,7 @@ namespace GVC31G_HFT_2021221.Data
                 .HasForeignKey(assignment => assignment.EmployeeId)
                 .OnDelete(DeleteBehavior.Cascade);
             });
-            Manager man1 = new Manager { Id = 1, DepartmentName = "IT" };
+            Manager man1 = new Manager { Name="Józska ", Id = 1, DepartmentName = "IT" };
             Employee emp1 = new Employee { Id = 1, Name = "Béla", ManagerId = man1.Id };
             Employee emp2 = new Employee { Id = 2, Name = "Ferkó", ManagerId = man1.Id };
             Assignment ass1 = new Assignment { Id = 1, dueDate = DateTime.Now, EmployeeId = emp1.Id, Description = "asd" };

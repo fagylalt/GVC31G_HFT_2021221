@@ -16,6 +16,8 @@ namespace GVC31G_HFT_2021221.Models
         public int Id { get; set; }
         [MaxLength(100)]
         [Required]
+
+        public string Name { get; set; }
         public string DepartmentName { get; set; }
 
         [NotMapped]
