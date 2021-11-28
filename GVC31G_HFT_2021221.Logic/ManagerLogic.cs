@@ -13,11 +13,7 @@ namespace GVC31G_HFT_2021221.Logic
         {
             this.managerRepo = manRepo;
         }
-        public double AVGEmployees()
-        {
-            return managerRepo.ReadAll().Average(x => x.Employees.Count);
-        }
-
+        
         public void Create(Manager manager)
         {
             managerRepo.Create(manager);
@@ -42,5 +38,6 @@ namespace GVC31G_HFT_2021221.Logic
         {
             managerRepo.Update(manager);
         }
+        
     }
 }

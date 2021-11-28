@@ -9,7 +9,6 @@ namespace GVC31G_HFT_2021221.Logic
 {
     public interface IManagerLogic
     {
-        double AVGEmployees();
         void Create(Manager manager);
         void Delete(int id);
         Manager Read(int id);
