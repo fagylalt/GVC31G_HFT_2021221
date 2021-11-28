@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace GVC31G_HFT_2021221.Models
@@ -18,6 +19,7 @@ namespace GVC31G_HFT_2021221.Models
             public string Description { get; set; }
             public DateTime dueDate { get; set; }
             [NotMapped]
+            [JsonIgnore]
             public virtual Employee Employee { get; set; }
             [ForeignKey(nameof(Employee))]
             public int EmployeeId { get; set; }

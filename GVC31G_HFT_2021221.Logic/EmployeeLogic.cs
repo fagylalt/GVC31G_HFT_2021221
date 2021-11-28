@@ -52,7 +52,6 @@ namespace GVC31G_HFT_2021221.Logic
         public string whoHasMaxAssignment()
         {
             var readRepo = repo.ReadAll();
-            ;
             var max = (from X in readRepo
                        orderby X.CurrentTask.Count() descending
                        select X.Name).FirstOrDefault();

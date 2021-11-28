@@ -14,5 +14,7 @@ namespace GVC31G_HFT_2021221.Logic
         Assignment Read(int id);
         IEnumerable<Assignment> ReadAll();
         void Update(Assignment Assignment);
+        Employee getLatestAssignment();
+        Employee getLongestAssignment();
     }
 }
