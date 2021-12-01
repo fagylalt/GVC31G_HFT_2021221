@@ -31,6 +31,7 @@ namespace GVC31G_HFT_2021221.Test
                         Id = 1,
                         Name ="Gizi",
                         DepartmentName="IT"
+                        
 
                     },
                     new Manager()
@@ -50,13 +51,18 @@ namespace GVC31G_HFT_2021221.Test
                     {
                         Id = 1,
                         Name = "Géza",
-                        ManagerId = 1
+                        ManagerId = 1,
+                        Manager = new Manager(){Id = 1, Name="Jocó", DepartmentName="IT"},
+                        CurrentTask = new List<Assignment>(){new Assignment() { Description="AAA", dueDate=DateTime.MaxValue, Employee = new Employee() { Name = "Jani", Id = 1, ManagerId = 1}, EmployeeId = 1, Id = 1 }, new Assignment() { Description = "AAAA", dueDate = DateTime.MinValue, Employee = new Employee() { Name = "Janika", Id = 2, ManagerId = 1 }, EmployeeId = 2, Id = 2 } }
                     },
                     new Employee()
                     {
                         Id = 2, 
                         Name="Árpád",
-                        ManagerId = 2
+                        ManagerId = 2,
+                        Manager = new Manager(){Id = 1, Name="Gábor", DepartmentName="OT"},
+                        CurrentTask = new List<Assignment>(){new Assignment() { Description="AAA", dueDate=DateTime.MaxValue, Employee = new Employee() { Name = "Jani", Id = 1, ManagerId = 1}, EmployeeId = 1, Id = 1 } }
+
                     }
                 }.AsQueryable());
             e1 = new EmployeeLogic(mockEmployeeRepo.Object);
@@ -69,7 +75,8 @@ namespace GVC31G_HFT_2021221.Test
                         Id = 1,
                         Description="A",
                         dueDate = DateTime.Now,
-                        EmployeeId = 1
+                        EmployeeId = 1,
+                        Employee = new Employee(){Id = 1, Name = "Gézu", ManagerId = 1}
 
                     },
                     new Assignment()
@@ -77,21 +84,23 @@ namespace GVC31G_HFT_2021221.Test
                         Id = 2,
                         Description="AA",
                         dueDate = DateTime.MinValue,
-                        EmployeeId = 1
+                        EmployeeId = 1,
+                        Employee = new Employee(){Id = 1, Name = "Gézu", ManagerId = 1}
                     },
                     new Assignment()
                     {
                         Id = 3,
                         Description="AAA",
                         dueDate=DateTime.MaxValue,
-                        EmployeeId = 2
+                        EmployeeId = 2,
+                        Employee = new Employee(){Id = 2, Name = "István", ManagerId = 1}
                     }
                 }.AsQueryable());
             a1 = new AssignmentLogic(mockAssignmentRepo.Object);
 
         }
         [TestCase("Feri", "IT", true)]
-        //[TestCase("Jani", null, false)]
+        [TestCase("Jani", null, false)]
         public void CreateManagerTest(string name, string depname, bool result)
         {
             if (result)
@@ -113,7 +122,7 @@ namespace GVC31G_HFT_2021221.Test
             }
         }
         [TestCase("Igen", "2022.01.01", true)]
-        //[TestCase("Nem", null, false)]
+        [TestCase("Nem", null, false)]
         public void CreateAssignmentTest(string desc, DateTime time, bool result)
         {
             if (result)
@@ -136,7 +145,7 @@ namespace GVC31G_HFT_2021221.Test
             }
         }
         [TestCase("Igen", true)]
-       // [TestCase(null, false)]
+        [TestCase(null, false)]
         public void CreateEmployeeTest(string name, bool result)
         {
             if (result)
@@ -173,25 +182,49 @@ namespace GVC31G_HFT_2021221.Test
         [Test]
         public void ListAllEmployeesWithTheirManagerTest()
         {
-            var readall = e1.ReadAll();
             var result = e1.ListAllEmployeesWithTheirManager();
             ;
-            Assert.That(result.ToArray()[0].managerName =="Erzsi");
+            Assert.That(result.ToArray()[0].managerName =="Jocó");
         }
         [Test]
         public void whoHasTheMostAssignmentsTest()
         {
 
             var result = e1.whoHasTheMostAssignments();
-            Assert.That(result == "Ádám");
+            Assert.That(result == "Géza");
 
         }
         [Test]
         public void EmployeesMergedByManagersTest()
         {
-            var heh = e1.ReadAll();
             var result = e1.EmployeesMergedByManagers();
-            Assert.That(result.ToArray()[0].managerName == "Erzsi");
+            Assert.That(result.ToArray()[0].managerName == "Jocó");
+        }
+        [TestCase(1, true)]
+        [TestCase(-1, false)]
+        public void ManagerReadTest(int id, bool result)
+        {
+            if (result)
+            {
+                Assert.That(() => m1.Read(id), Throws.Nothing);
+            }
+            else
+            {
+                Assert.That(() => m1.Read(id), Throws.Exception);
+            }
+        }
+        [TestCase(1, true)]
+        [TestCase(-1, false)]
+        public void ManagerDeleteTest(int id, bool result)
+        {
+            if (result)
+            {
+                Assert.That(() => m1.Delete(id), Throws.Nothing);
+            }
+            else
+            {
+                Assert.That(() => m1.Delete(id), Throws.Exception);
+            }
         }
 
     }

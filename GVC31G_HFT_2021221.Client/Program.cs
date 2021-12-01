@@ -15,8 +15,6 @@ namespace GVC31G_HFT_2021221
             TrainDbContext db1 = new TrainDbContext();
             EmployeeRepository emprep = new EmployeeRepository(db1);
             EmployeeLogic emplogic = new EmployeeLogic(emprep);
-            var emplogic1 = emplogic.ReadAll();
-            ;
         }
 
     }

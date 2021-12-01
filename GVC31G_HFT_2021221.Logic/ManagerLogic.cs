@@ -28,12 +28,26 @@ namespace GVC31G_HFT_2021221.Logic
 
         public void Delete(int id)
         {
-            managerRepo.Delete(id);
+            if (id > 0)
+            {
+                managerRepo.Delete(id);
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Id can not be lower than 0");
+            }
         }
 
         public Manager Read(int id)
         {
+            if(id > 0)
+            {
             return managerRepo.Read(id);
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Id can not be lower than 0");
+            }
         }
 
         public IEnumerable<Manager> ReadAll()
