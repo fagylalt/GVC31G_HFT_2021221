@@ -12,7 +12,7 @@ namespace GVC31G_HFT_2021221.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [MaxLength(100)]
+        [MaxLength(30)]
         public string Name { get; set; }
         [NotMapped]
         [JsonIgnore]

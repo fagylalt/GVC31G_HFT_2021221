@@ -13,6 +13,7 @@ namespace GVC31G_HFT_2021221.Endpoint
     {
         public static void Main(string[] args)
         {
+
             CreateHostBuilder(args).Build().Run();
         }
 

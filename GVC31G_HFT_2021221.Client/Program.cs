@@ -1,4 +1,5 @@
-﻿using GVC31G_HFT_2021221.Data;
+﻿using GVC31G_HFT_2021221.Client;
+using GVC31G_HFT_2021221.Data;
 using GVC31G_HFT_2021221.Logic;
 using GVC31G_HFT_2021221.Models;
 using GVC31G_HFT_2021221.Repository;
@@ -10,7 +11,9 @@ namespace GVC31G_HFT_2021221
     {
         static void Main(string[] args)
         {
-
+            RestService restServ = new RestService("http://localhost:51716");
+            
         }
+
     }
 }

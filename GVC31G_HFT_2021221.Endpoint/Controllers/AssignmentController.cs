@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GVC31G_HFT_2021221.Endpoint.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AssignmentController : ControllerBase
     {
@@ -18,29 +18,31 @@ namespace GVC31G_HFT_2021221.Endpoint.Controllers
         {
             logic = AssignmentLogic;
         }
-
+        // GET: /assignment
         [HttpGet]
         public IEnumerable<Assignment> Get()
         {
             return logic.ReadAll();
         }
+        // GET: /assignment/5
         [HttpGet("{id}")]
         public Assignment Get(int id)
         {
             return logic.Read(id);
         }
+        // POST /assignment
         [HttpPost]
-
         public void Post([FromBody] Assignment value)
         {
             logic.Create(value);
         }
-        [HttpPut("{id}")]
-
+        // PUT /assignment
+        [HttpPut]
         public void Put([FromBody] Assignment value)
         {
             logic.Update(value);
         }
+        //DELETE assignment/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
