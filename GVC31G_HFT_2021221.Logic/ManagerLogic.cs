@@ -16,7 +16,14 @@ namespace GVC31G_HFT_2021221.Logic
         
         public void Create(Manager manager)
         {
+            if(manager.Name != null && manager.DepartmentName != null)
+            {
             managerRepo.Create(manager);
+            }
+            else
+            {
+                throw new ArgumentNullException("Manager must have a name and a department name");
+            }
         }
 
         public void Delete(int id)

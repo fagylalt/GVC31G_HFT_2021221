@@ -16,7 +16,14 @@ namespace GVC31G_HFT_2021221.Logic
         }
         public void Create(Employee Employee)
         {
+            if(Employee.Name != null)
+            {
             repo.Create(Employee);
+            }
+            else
+            {
+                throw new ArgumentNullException("Employee must have a name");
+            }
         }
 
         public void Delete(int id)
@@ -49,7 +56,7 @@ namespace GVC31G_HFT_2021221.Logic
                 return true;
             }
         }
-        public string whoHasMaxAssignment()
+        public string whoHasTheMostAssignments()
         {
             var readRepo = repo.ReadAll();
             var max = (from X in readRepo
@@ -57,7 +64,7 @@ namespace GVC31G_HFT_2021221.Logic
                        select X.Name).FirstOrDefault();
             return max;
         }
-        public IEnumerable<SelectAllEmp> ListAllEmployees()
+        public IEnumerable<SelectAllEmp> ListAllEmployeesWithTheirManager()
         {
             var allEmp = repo.ReadAll();
             var selectEmp = from x in allEmp
@@ -69,7 +76,7 @@ namespace GVC31G_HFT_2021221.Logic
                             };
             return selectEmp;
         }
-        public IEnumerable<SelectEmpCount> EmployeesbyManagers()
+        public IEnumerable<SelectEmpCount> EmployeesMergedByManagers()
         {
             var allEmp = repo.ReadAll();
             var selectEmp = (from x in allEmp
@@ -88,9 +95,9 @@ namespace GVC31G_HFT_2021221.Logic
         public string managerName { get; set; }
         public string name { get;  set; }
     }
-public class SelectEmpCount
-{
-    public string managerName { get; set; }
-    public double count { get; set; }
-}
+    public class SelectEmpCount
+    {
+        public string managerName { get; set; }
+        public double count { get; set; }
+    }
 }

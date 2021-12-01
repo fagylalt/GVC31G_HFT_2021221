@@ -15,10 +15,10 @@ namespace GVC31G_HFT_2021221.Logic
         IEnumerable<Employee> ReadAll();
         void Update(Employee Employee);
         bool DoesEmployeeHasManager(Employee Employee);
-        IEnumerable<SelectAllEmp> ListAllEmployees();
-        IEnumerable<SelectEmpCount> EmployeesbyManagers();
+        IEnumerable<SelectAllEmp> ListAllEmployeesWithTheirManager();
+        IEnumerable<SelectEmpCount> EmployeesMergedByManagers();
 
-        string whoHasMaxAssignment();
+        string whoHasTheMostAssignments();
 
     }
 }

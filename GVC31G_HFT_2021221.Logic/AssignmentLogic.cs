@@ -17,7 +17,14 @@ namespace GVC31G_HFT_2021221.Logic
         }
         public void Create(Assignment Assignment)
         {
+            if (Assignment.Description != string.Empty && Assignment.dueDate != default(DateTime))
+            {
             assignmentRepo.Create(Assignment);
+            }
+            else
+            {
+                throw new ArgumentNullException("Description and due date can not be null");
+            }
         }
 
         public void Delete(int id)
@@ -40,7 +47,7 @@ namespace GVC31G_HFT_2021221.Logic
             assignmentRepo.Update(Assignment);
         }
 
-        public Employee getLatestAssignment()
+        public Employee getEmployeeWithLatestAssignment()
         {
             var allAssignments = assignmentRepo.Readall();
             var latestAssignment = (from X in allAssignments
@@ -48,7 +55,7 @@ namespace GVC31G_HFT_2021221.Logic
                                    select X.Employee).First();
             return latestAssignment;
         }
-        public Employee getLongestAssignment()
+        public Employee getEmployeeWithLongestAssignmentDescription()
         {
             var allAssignemnts = assignmentRepo.Readall();
             var longestAssignment = (from x in allAssignemnts
