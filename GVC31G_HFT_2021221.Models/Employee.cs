@@ -20,9 +20,6 @@ namespace GVC31G_HFT_2021221.Models
         [ForeignKey(nameof(Manager))]
         public int ManagerId { get; set; }
         public virtual ICollection<Assignment> CurrentTask { get; set; }
-        public Employee()
-        {
-            CurrentTask = new HashSet<Assignment>();
-        }
+        
     }
 }

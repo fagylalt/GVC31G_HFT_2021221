@@ -12,10 +12,10 @@ namespace GVC31G_HFT_2021221
         static void Main(string[] args)
         {
             //RestService restServ = new RestService("http://localhost:51716");
-            TrainDbContext db = new TrainDbContext();
-            EmployeeRepository emprep = new EmployeeRepository(db);
+            TrainDbContext db1 = new TrainDbContext();
+            EmployeeRepository emprep = new EmployeeRepository(db1);
             EmployeeLogic emplogic = new EmployeeLogic(emprep);
-            var result = emplogic.ListAllEmployeesWithTheirManager();
+            var emplogic1 = emplogic.ReadAll();
             ;
         }
 

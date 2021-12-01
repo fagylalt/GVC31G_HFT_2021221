@@ -48,15 +48,16 @@ namespace GVC31G_HFT_2021221.Data
             Manager man1 = new Manager { Name="Józska ", Id = 1, DepartmentName = "IT" };
             Manager man2 = new Manager { Name="Erika", Id = 2, DepartmentName = "OT" };
             Employee emp1 = new Employee { Id = 1, Name = "Béla", ManagerId = man1.Id };
-            Employee emp2 = new Employee { Id = 2, Name = "Ferkó", ManagerId = man1.Id };
+            Employee emp2 = new Employee { Id = 2, Name = "Ferkóka", ManagerId = man1.Id };
             Employee emp3 = new Employee { Id = 3, Name = "Ica", ManagerId = man2.Id };
+            Employee emp4 = new Employee { Id = 4, Name = "Icuka", ManagerId = man2.Id };
             Assignment assi1 = new Assignment { Id = 1, dueDate = DateTime.Now, EmployeeId = emp1.Id, Description = "asd" };
             Assignment assi2 = new Assignment { Id = 2, dueDate = DateTime.MinValue, EmployeeId = emp2.Id, Description = "asdeeee" };
             Assignment assi3 = new Assignment { Id = 3, dueDate = DateTime.MaxValue, EmployeeId = emp2.Id, Description = "Azigen" };
             
 
             modelBuilder.Entity<Manager>().HasData(man1,man2);
-            modelBuilder.Entity<Employee>().HasData(emp1, emp2,emp3);
+            modelBuilder.Entity<Employee>().HasData(emp1, emp2,emp3, emp4);
             modelBuilder.Entity<Assignment>().HasData(assi1,assi2,assi3);
         }
     }

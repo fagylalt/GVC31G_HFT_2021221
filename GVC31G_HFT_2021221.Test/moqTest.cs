@@ -19,56 +19,6 @@ namespace GVC31G_HFT_2021221.Test
         EmployeeLogic e1;
         public moqTest()
         {
-            Manager fakeManager = new Manager()
-            {
-                Id = 1,
-                Name = "Erzsi",
-                DepartmentName = "IT"
-            };
-            Manager fakeManager2 = new Manager()
-            {
-                Id = 2,
-                Name = "Gizi",
-                DepartmentName = "OT"
-            };
-            Employee fakeEmployee = new Employee()
-            {
-                Id = 1,
-                Name = "Józsi",
-                Manager = fakeManager
-            };
-            Employee fakeEmployee2 = new Employee()
-            {
-                Id = 2,
-                Name = "Ádám",
-                Manager = fakeManager2
-            };
-            Assignment fakeAssignment = new Assignment()
-            {
-                Id = 1,
-                Description = "Vonatfék csere",
-                dueDate = DateTime.Now,
-                Employee = fakeEmployee,
-                EmployeeId = fakeEmployee.Id
-
-            };
-            Assignment fakeAssignment2 = new Assignment()
-            {
-                Id = 2,
-                Description = "Vonatkerék levegőfúvás",
-                dueDate = Convert.ToDateTime("2022.01.01"),
-                Employee = fakeEmployee2,
-                EmployeeId = fakeEmployee2.Id
-            };
-            Assignment fakeAssignment3 = new Assignment()
-            {
-                Id = 3,
-                Description = "igen teszt",
-                dueDate = DateTime.MaxValue,
-                Employee = fakeEmployee2,
-                EmployeeId = fakeEmployee2.Id
-                
-            };
             Mock<IManagerRepository> mockManagerRepo = new Mock<IManagerRepository>();
             Mock<IEmployeeRepository> mockEmployeeRepo = new Mock<IEmployeeRepository>();
             Mock<IAssignmentRepository> mockAssignmentRepo = new Mock<IAssignmentRepository>();
@@ -76,8 +26,19 @@ namespace GVC31G_HFT_2021221.Test
             mockManagerRepo.Setup((t) => t.ReadAll()).Returns(
                 new List<Manager>()
                 {
-                    fakeManager,
-                    fakeManager2
+                    new Manager()
+                    {
+                        Id = 1,
+                        Name ="Gizi",
+                        DepartmentName="IT"
+
+                    },
+                    new Manager()
+                    {
+                        Id = 2,
+                        Name ="Béla",
+                        DepartmentName="Vonat"
+                    }
 
                 }.AsQueryable());
             m1 = new ManagerLogic(mockManagerRepo.Object);
@@ -85,20 +46,48 @@ namespace GVC31G_HFT_2021221.Test
             mockEmployeeRepo.Setup((t) => t.ReadAll()).Returns(
                 new List<Employee>()
                 {
-                    fakeEmployee,
-                    fakeEmployee2
+                    new Employee()
+                    {
+                        Id = 1,
+                        Name = "Géza",
+                        ManagerId = 1
+                    },
+                    new Employee()
+                    {
+                        Id = 2, 
+                        Name="Árpád",
+                        ManagerId = 2
+                    }
                 }.AsQueryable());
             e1 = new EmployeeLogic(mockEmployeeRepo.Object);
             mockAssignmentRepo.Setup((t) => t.Create(It.IsAny<Assignment>()));
             mockAssignmentRepo.Setup((t) => t.Readall()).Returns(
                 new List<Assignment>()
                 {
-                    fakeAssignment,
-                    fakeAssignment2,
-                    fakeAssignment3
+                    new Assignment()
+                    {
+                        Id = 1,
+                        Description="A",
+                        dueDate = DateTime.Now,
+                        EmployeeId = 1
+
+                    },
+                    new Assignment()
+                    {
+                        Id = 2,
+                        Description="AA",
+                        dueDate = DateTime.MinValue,
+                        EmployeeId = 1
+                    },
+                    new Assignment()
+                    {
+                        Id = 3,
+                        Description="AAA",
+                        dueDate=DateTime.MaxValue,
+                        EmployeeId = 2
+                    }
                 }.AsQueryable());
             a1 = new AssignmentLogic(mockAssignmentRepo.Object);
-
 
         }
         [TestCase("Feri", "IT", true)]
@@ -184,6 +173,7 @@ namespace GVC31G_HFT_2021221.Test
         [Test]
         public void ListAllEmployeesWithTheirManagerTest()
         {
+            var readall = e1.ReadAll();
             var result = e1.ListAllEmployeesWithTheirManager();
             ;
             Assert.That(result.ToArray()[0].managerName =="Erzsi");
@@ -199,6 +189,7 @@ namespace GVC31G_HFT_2021221.Test
         [Test]
         public void EmployeesMergedByManagersTest()
         {
+            var heh = e1.ReadAll();
             var result = e1.EmployeesMergedByManagers();
             Assert.That(result.ToArray()[0].managerName == "Erzsi");
         }
