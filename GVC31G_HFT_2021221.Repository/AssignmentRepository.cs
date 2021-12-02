@@ -42,7 +42,6 @@ namespace GVC31G_HFT_2021221.Repository
             var oldAssignment = Read(assignment.Id);
             oldAssignment.Description = assignment.Description;
             oldAssignment.dueDate = assignment.dueDate;
-            oldAssignment.Employee = assignment.Employee;
             oldAssignment.EmployeeId = assignment.EmployeeId;
             db.SaveChanges();
         }

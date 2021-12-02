@@ -39,6 +39,7 @@ namespace GVC31G_HFT_2021221.Endpoint.Controllers
 
         public void Put([FromBody] Manager value)
         {
+            ;
             logic.Update(value);
         }
         [HttpDelete("{id}")]

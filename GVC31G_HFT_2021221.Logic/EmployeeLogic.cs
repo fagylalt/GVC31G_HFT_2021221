@@ -67,13 +67,13 @@ namespace GVC31G_HFT_2021221.Logic
         public IEnumerable<SelectAllEmp> ListAllEmployeesWithTheirManager()
         {
             var allEmp = repo.ReadAll();
-            var selectEmp = from x in allEmp
+            var selectEmp = (from x in allEmp 
                             where x.ManagerId == x.Manager.Id
                             select new SelectAllEmp
                             {
                                 managerName = x.Manager.Name,
                                 name = x.Name
-                            };
+                            }).Distinct();
             return selectEmp;
         }
         public IEnumerable<SelectEmpCount> EmployeesMergedByManagers()

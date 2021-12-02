@@ -215,29 +215,28 @@ namespace GVC31G_HFT_2021221.Test
         [Test]
         public void getEmployeeWithLatestAssignmentTest()
         {
-            var res = a1.getEmployeeWithLatestAssignment();
-            Assert.That(res.ToList()[0], Is.EqualTo("István"));
+            var result = a1.getEmployeeWithLatestAssignment();
+            Assert.That(result,Is.EqualTo("István"));
 
         }
         [Test]
         public void getLongestAssignmentDescriptionTest()
         {
             var result = a1.getEmployeeWithLongestAssignmentDescription();
-            Assert.That(result.ToList()[0], Is.EqualTo("István"));
+            Assert.That(result, Is.EqualTo("István"));
         }
         [Test]
         public void ListAllEmployeesWithTheirManagerTest()
         {
             var result = e1.ListAllEmployeesWithTheirManager();
-            ;
-            Assert.That(result.ToArray()[0].managerName =="Jocó");
+            Assert.That(result.ToList()[0].managerName == "Jocó");
         }
         [Test]
         public void whoHasTheMostAssignmentsTest()
         {
 
             var result = e1.whoHasTheMostAssignments();
-            Assert.That(result.ToArray()[0], Is.EqualTo("Géza"));
+            Assert.That(result, Is.EqualTo("Géza"));
 
         }
         [Test]

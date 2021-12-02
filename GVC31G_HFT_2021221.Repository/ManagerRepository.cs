@@ -40,6 +40,7 @@ namespace GVC31G_HFT_2021221.Repository
         public void Update(Manager Manager)
         {
             var oldManager = Read(Manager.Id);
+            oldManager.Name = Manager.Name;
             oldManager.DepartmentName = Manager.DepartmentName;
             oldManager.Employees = Manager.Employees;
             db.SaveChanges();

@@ -40,6 +40,7 @@ namespace GVC31G_HFT_2021221.Repository
         public void Update(Employee employee)
         {
             var oldEmployee = Read(employee.Id);
+            oldEmployee.Name = employee.Name;
             oldEmployee.CurrentTask = employee.CurrentTask;
             oldEmployee.Manager = employee.Manager;
             oldEmployee.ManagerId = employee.ManagerId;

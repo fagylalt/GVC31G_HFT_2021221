@@ -56,7 +56,7 @@ namespace GVC31G_HFT_2021221.Logic
         }
 
         public void Update(Manager manager)
-        {
+        { 
             managerRepo.Update(manager);
         }
         
