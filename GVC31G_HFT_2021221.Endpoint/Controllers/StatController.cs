@@ -23,14 +23,14 @@ namespace GVC31G_HFT_2021221.Endpoint.Controllers
         }
         [HttpGet]
         // stat/EmployeeWithLatestAssignment
-        public IEnumerable<string> EmployeeWithLatestAssignment()
+        public string EmployeeWithLatestAssignment()
         {
             return alogic.getEmployeeWithLatestAssignment();
         }
 
         // stat/getEmployeeLongestAssignmentDescription
         [HttpGet]
-        public IEnumerable<string> getEmployeeLongestAssignmentDescription()
+        public string getEmployeeLongestAssignmentDescription()
         {
             return alogic.getEmployeeWithLongestAssignmentDescription();
         }
@@ -51,7 +51,7 @@ namespace GVC31G_HFT_2021221.Endpoint.Controllers
 
         [HttpGet]
         // stat/mostassignments
-        public IEnumerable<string> MostAssignments()
+        public string whoHasTheMostAssignments()
         {
             return elogic.whoHasTheMostAssignments();
         }

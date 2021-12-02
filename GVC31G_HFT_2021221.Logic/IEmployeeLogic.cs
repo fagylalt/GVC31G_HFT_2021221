@@ -18,7 +18,7 @@ namespace GVC31G_HFT_2021221.Logic
         IEnumerable<SelectAllEmp> ListAllEmployeesWithTheirManager();
         IEnumerable<SelectEmpCount> EmployeesMergedByManagers();
 
-        IEnumerable<string> whoHasTheMostAssignments();
+        string whoHasTheMostAssignments();
 
     }
 }

@@ -1,9 +1,9 @@
-﻿using ConsoleTools;
-using GVC31G_HFT_2021221.Data;
+﻿using CarDB.Client;
+using ConsoleTools;
 using GVC31G_HFT_2021221.Logic;
 using GVC31G_HFT_2021221.Models;
-using GVC31G_HFT_2021221.Repository;
 using System;
+using System.Collections.Generic;
 
 namespace GVC31G_HFT_2021221
 {
@@ -18,31 +18,38 @@ namespace GVC31G_HFT_2021221
                 .Add("Read a single assignment", () => ReadSingleAssignment())
                 .Add("Read all assignments", () => ReadAllAssignment())
                 .Add("Update assignment", () => UpdateAssignment())
-                .Add("Delete assignment", () => DeleteAssignment());
+                .Add("Delete assignment", () => DeleteAssignment())
+                .Add("BACK", ConsoleMenu.Close);
+
+
             var managerMenu = new ConsoleMenu(args, level: 1)
                 .Add("Add manager", () => AddManager())
                 .Add("Read a single Manager", () => ReadSingleManager())
                 .Add("Read all Managers", () => ReadAllManagers())
                 .Add("Update Manager", () => UpdateManager())
-                .Add("Delete Manager", () => DeleteManager());
+                .Add("Delete Manager", () => DeleteManager())
+                .Add("BACK", ConsoleMenu.Close);
             var employeMenu = new ConsoleMenu(args, level: 1)
                 .Add("Add Employee", () => AddEmployee())
                 .Add("Read a single Employee", () => ReadSingleEmployee())
                 .Add("Read all Employees", () => ReadAllEmployees())
                 .Add("Update Employee", () => UpdateEmployee())
-                .Add("Delete Employee", () => DeleteEmployee());
+                .Add("Delete Employee", () => DeleteEmployee())
+                .Add("BACK", ConsoleMenu.Close);
 
             var statMenu = new ConsoleMenu(args, level: 1)
                 .Add("Employee's name with the least urgent assignment", () => ListEmployeeWithLatestAssignment())
                 .Add("Employee with the longest assignment description", () => ListEmployeeWithLongestAssignmentDescription())
                 .Add("Employees with their managers", () => ListAllEmployeesWithTheirManager())
                 .Add("Employees merged with their managers: ", () => ListEmployeesMergedwithTheirManagers())
-                .Add("Employee with the most assignments", () => ListMostAssignments());
+                .Add("Employee with the most assignments", () => ListMostAssignments())
+                .Add("BACK", ConsoleMenu.Close);
             ConsoleMenu mainMenu = new ConsoleMenu(args, level: 0)
                 .Add("Assignment related tasks: ", () => assignmentMenu.Show())
                 .Add("Manager related tasks: ", () => managerMenu.Show())
                 .Add("Employee related tasks: ", () => employeMenu.Show())
-                .Add("Statistics menu", () => statMenu.Show());
+                .Add("Statistics menu", () => statMenu.Show())
+                .Add("QUIT", ConsoleMenu.Close);
             mainMenu.Show();
 
         }
@@ -211,7 +218,7 @@ namespace GVC31G_HFT_2021221
         static void ListAllEmployeesWithTheirManager()
         {
             var res = restServ.Get<SelectAllEmp>("stat/ListAllEmployeesWithTheirManagers");
-            res.ForEach(x => Console.WriteLine($" manager name: {x.managerName},emp name: {x.name} "));
+            res.ForEach(x => Console.WriteLine($"Manager name: {x.managerName},emp name: {x.name} "));
             Console.ReadKey();
         }
         static void ListEmployeesMergedwithTheirManagers()
@@ -222,8 +229,9 @@ namespace GVC31G_HFT_2021221
         }
         static void ListMostAssignments()
         {
-            var res = restServ.GetSingle<string>("stat/MostAssignments");
+            var res = restServ.GetSingle<string>("stat/whohasthemostassignments");
+            Console.WriteLine(res.ToString());
+            Console.ReadKey();
         }
-
     }
 }

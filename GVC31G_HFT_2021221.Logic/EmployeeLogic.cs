@@ -56,12 +56,12 @@ namespace GVC31G_HFT_2021221.Logic
                 return true;
             }
         }
-        public IEnumerable<string> whoHasTheMostAssignments()
+        public string whoHasTheMostAssignments()
         {
             var readRepo = repo.ReadAll();
             var max = (from X in readRepo
                        orderby X.CurrentTask.Count() descending
-                       select X.Name).ToList().Take(1);
+                       select X.Name).ToList().FirstOrDefault();
             return max;
         }
         public IEnumerable<SelectAllEmp> ListAllEmployeesWithTheirManager()
