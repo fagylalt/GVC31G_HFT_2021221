@@ -47,20 +47,20 @@ namespace GVC31G_HFT_2021221.Logic
             assignmentRepo.Update(Assignment);
         }
 
-        public Employee getEmployeeWithLatestAssignment()
+        public IEnumerable<string> getEmployeeWithLatestAssignment()
         {
             var allAssignments = assignmentRepo.Readall();
             var latestAssignment = (from X in allAssignments
                                    orderby X.dueDate descending
-                                   select X.Employee).First();
+                                   select X.Employee.Name).ToList().Take(1);
             return latestAssignment;
         }
-        public Employee getEmployeeWithLongestAssignmentDescription()
+        public  IEnumerable<string> getEmployeeWithLongestAssignmentDescription()
         {
             var allAssignemnts = assignmentRepo.Readall();
             var longestAssignment = (from x in allAssignemnts
                                     orderby x.Description.Length descending
-                                    select x.Employee).First();
+                                    select x.Employee.Name).ToList().Take(1);
             return longestAssignment;
         }
     }

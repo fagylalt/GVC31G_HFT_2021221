@@ -52,16 +52,62 @@ namespace GVC31G_HFT_2021221.Test
                         Id = 1,
                         Name = "Géza",
                         ManagerId = 1,
-                        Manager = new Manager(){Id = 1, Name="Jocó", DepartmentName="IT"},
-                        CurrentTask = new List<Assignment>(){new Assignment() { Description="AAA", dueDate=DateTime.MaxValue, Employee = new Employee() { Name = "Jani", Id = 1, ManagerId = 1}, EmployeeId = 1, Id = 1 }, new Assignment() { Description = "AAAA", dueDate = DateTime.MinValue, Employee = new Employee() { Name = "Janika", Id = 2, ManagerId = 1 }, EmployeeId = 2, Id = 2 } }
+                        Manager = new Manager()
+                        {
+                            Id = 1,
+                            Name="Jocó",
+                            DepartmentName="IT"
+                        },
+                        CurrentTask = new List<Assignment>()
+                        {
+                            new Assignment() 
+                            { 
+                                Description="AAA",
+                                dueDate=DateTime.MaxValue,
+                                Employee = new Employee() 
+                                { 
+                                    Name = "Jani",
+                                    Id = 1, ManagerId = 1
+                                },
+                                EmployeeId = 1, Id = 1 
+                            }
+                            ,new Assignment()
+                            { 
+                                Description = "AAAA",
+                                dueDate = DateTime.MinValue,
+                                Employee = new Employee() 
+                                { 
+                                    Name = "Janika",
+                                    Id = 2, ManagerId = 1 
+                                }
+                                ,EmployeeId = 2, Id = 2 
+                            } 
+                        }
                     },
                     new Employee()
                     {
                         Id = 2, 
                         Name="Árpád",
                         ManagerId = 2,
-                        Manager = new Manager(){Id = 1, Name="Gábor", DepartmentName="OT"},
-                        CurrentTask = new List<Assignment>(){new Assignment() { Description="AAA", dueDate=DateTime.MaxValue, Employee = new Employee() { Name = "Jani", Id = 1, ManagerId = 1}, EmployeeId = 1, Id = 1 } }
+                        Manager = new Manager()
+                        {
+                            Id = 1,
+                            Name="Gábor",
+                            DepartmentName="OT"
+                        },
+                        CurrentTask = new List<Assignment>()
+                        {
+                            new Assignment() {
+                                Description="AAA",
+                                dueDate=DateTime.MaxValue,
+                                Employee = new Employee() {
+                                    Name = "Jani",
+                                    Id = 1, 
+                                    ManagerId = 1
+                                }
+                                ,EmployeeId = 1, Id = 1 
+                                            } 
+                        }
 
                     }
                 }.AsQueryable());
@@ -169,15 +215,15 @@ namespace GVC31G_HFT_2021221.Test
         [Test]
         public void getEmployeeWithLatestAssignmentTest()
         {
-            var result = a1.getEmployeeWithLatestAssignment();
-            Assert.That(result.Id == 2);
+            var res = a1.getEmployeeWithLatestAssignment();
+            Assert.That(res.ToList()[0], Is.EqualTo("István"));
 
         }
         [Test]
         public void getLongestAssignmentDescriptionTest()
         {
             var result = a1.getEmployeeWithLongestAssignmentDescription();
-            Assert.That(result.Id == 2);
+            Assert.That(result.ToList()[0], Is.EqualTo("István"));
         }
         [Test]
         public void ListAllEmployeesWithTheirManagerTest()
@@ -191,7 +237,7 @@ namespace GVC31G_HFT_2021221.Test
         {
 
             var result = e1.whoHasTheMostAssignments();
-            Assert.That(result == "Géza");
+            Assert.That(result.ToArray()[0], Is.EqualTo("Géza"));
 
         }
         [Test]
