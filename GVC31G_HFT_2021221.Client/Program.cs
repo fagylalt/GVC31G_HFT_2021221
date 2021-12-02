@@ -185,7 +185,7 @@ namespace GVC31G_HFT_2021221
         static void ReadAllEmployees()
         {
             var result = restServ.Get<Employee>("employee");
-            result.ForEach(x => Console.WriteLine($"Employee name {x.Name}, employees managers name {x.ManagerId}, tasks on hand {x.CurrentTask.Count} "));
+            result.ForEach(x => Console.WriteLine($"Employee name {x.Name}, employees manager's id {x.ManagerId}, tasks on hand {x.CurrentTask.Count} "));
             Console.WriteLine("Press a key to return to menu");
             Console.ReadKey();
         }
@@ -193,7 +193,7 @@ namespace GVC31G_HFT_2021221
         {
             Console.WriteLine("Id of wanted employee");
             var result = restServ.Get<Employee>(Convert.ToInt32(Console.ReadLine()), "employee");
-            Console.WriteLine($"Employee name{result.Name}, employees managers id {result.Manager.Name}, tasks on hand {result.CurrentTask.Count} ");
+            Console.WriteLine($"Employee name{result.Name}, employees manager's id {result.Manager.Name}, tasks on hand {result.CurrentTask.Count} ");
             Console.WriteLine("Press a key to return to menu");
             Console.ReadKey();
         }
@@ -242,7 +242,7 @@ namespace GVC31G_HFT_2021221
         static void ListAllEmployeesWithTheirManager()
         {
             var res = restServ.Get<SelectAllEmp>("stat/ListAllEmployeesWithTheirManagers");
-            res.ForEach(x => Console.WriteLine($"Manager name: {x.managerName},emp name: {x.name} "));
+            res.ForEach(x => Console.WriteLine($"Manager name: {x.managerName}, Employee's name: {x.name} "));
             Console.WriteLine("Press a key to return to menu");
             Console.ReadKey();
         }
