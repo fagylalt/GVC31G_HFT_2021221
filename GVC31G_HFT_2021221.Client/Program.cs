@@ -18,8 +18,7 @@ namespace GVC31G_HFT_2021221
                 .Add("Read a single assignment", () => ReadSingleAssignment())
                 .Add("Read all assignments", () => ReadAllAssignment())
                 .Add("Update assignment", () => UpdateAssignment())
-                .Add("Delete assignment", () => DeleteAssignment())
-                .Add("Return to main menu", ())
+                .Add("Delete assignment", () => DeleteAssignment());
             var managerMenu = new ConsoleMenu(args, level: 1)
                 .Add("Add manager", () => AddManager())
                 .Add("Read a single Manager", () => ReadSingleManager())
@@ -33,7 +32,12 @@ namespace GVC31G_HFT_2021221
                 .Add("Update Employee", () => UpdateEmployee())
                 .Add("Delete Employee", () => DeleteEmployee());
 
-            var statMenu = new ConsoleMenu(args, level: 1);
+            var statMenu = new ConsoleMenu(args, level: 1)
+                .Add("Employee's name with the least urgent assignment", () => ListEmployeeWithLatestAssignment())
+                .Add("Employee with the longest assignment description", () => ListEmployeeWithLongestAssignmentDescription())
+                .Add("Employees with their managers", () => ListAllEmployeesWithTheirManager())
+                .Add("Employees merged with their managers: ", () => ListEmployeesMergedwithTheirManagers())
+                .Add("Employee with the most assignments", () => ListMostAssignments());
             ConsoleMenu mainMenu = new ConsoleMenu(args, level: 0)
                 .Add("Assignment related tasks: ", () => assignmentMenu.Show())
                 .Add("Manager related tasks: ", () => managerMenu.Show())
@@ -61,7 +65,7 @@ namespace GVC31G_HFT_2021221
         static void ReadAllAssignment()
         {
             var result = restServ.Get<Assignment>("assignment");
-            result.ForEach(x => Console.WriteLine($"Assignment desc: {x.Description}, assigment duedate {x.dueDate}, employee responsible {x.Employee.Name} "));
+            result.ForEach(x => Console.WriteLine($"Assignment desc: {x.Description}, assigment duedate {x.dueDate}, employee responsible {x.Id} "));
             Console.ReadKey();
 
         }
@@ -111,14 +115,14 @@ namespace GVC31G_HFT_2021221
         }
         static void ReadAllManagers()
         {
-            var result = restServ.Get<Manager>("managers");
+            var result = restServ.Get<Manager>("manager");
             result.ForEach(x => Console.WriteLine($"Manager name: {x.Name}, department {x.DepartmentName}, employees controlled {x.Employees.Count} "));
             Console.ReadKey();
         }
         static void ReadSingleManager()
         {
             Console.WriteLine("Id of wanted manager");
-            var result = restServ.Get<Manager>(Convert.ToInt32(Console.ReadLine()), "managers");
+            var result = restServ.Get<Manager>(Convert.ToInt32(Console.ReadLine()), "manager");
             Console.WriteLine($"Manager name: {result.Name}, department {result.DepartmentName}, employees controlled {result.Employees.Count} ");
             Console.ReadKey();
         }
@@ -131,7 +135,7 @@ namespace GVC31G_HFT_2021221
             newManager.Name = Console.ReadLine();
             Console.WriteLine("New department name");
             newManager.DepartmentName = Console.ReadLine();
-            restServ.Put<Manager>(newManager, "managers");
+            restServ.Put<Manager>(newManager, "manager");
             Console.WriteLine($"Successfuly updated {id}");
             Console.ReadKey();
         }
@@ -139,7 +143,7 @@ namespace GVC31G_HFT_2021221
         {
             Console.WriteLine("Id of the soon to be deleted manager");
             int id = int.Parse(Console.ReadLine());
-            restServ.Delete(id, "managers");
+            restServ.Delete(id, "manager");
             Console.WriteLine("Successfuly deleted the item");
             Console.ReadKey();
         }
@@ -152,20 +156,20 @@ namespace GVC31G_HFT_2021221
             Console.WriteLine("Please provide Employee name");
             newEmployee.Name = Console.ReadLine();
             Console.WriteLine("Please provide Employee manager id");
-            restServ.Post<Employee>(newEmployee, "employees");
+            restServ.Post<Employee>(newEmployee, "employee");
             Console.WriteLine("Successfully added");
             Console.ReadKey();
         }
         static void ReadAllEmployees()
         {
-            var result = restServ.Get<Employee>("employees");
+            var result = restServ.Get<Employee>("employee");
             result.ForEach(x => Console.WriteLine($"Employee name{x.Name}, employees managers name {x.Manager.Name}, tasks on hand {x.CurrentTask.Count} "));
             Console.ReadKey();
         }
         static void ReadSingleEmployee()
         {
-            Console.WriteLine("Id of wanted employee+");
-            var result = restServ.Get<Employee>(Convert.ToInt32(Console.ReadLine()), "employees");
+            Console.WriteLine("Id of wanted employee");
+            var result = restServ.Get<Employee>(Convert.ToInt32(Console.ReadLine()), "employee");
             Console.WriteLine($"Employee name{result.Name}, employees managers name {result.Manager.Name}, tasks on hand {result.CurrentTask.Count} ");
             Console.ReadKey();
         }
@@ -178,7 +182,7 @@ namespace GVC31G_HFT_2021221
             newEmployee.Name = Console.ReadLine();
             Console.WriteLine("new manager id");
             newEmployee.ManagerId = int.Parse(Console.ReadLine());
-            restServ.Put<Employee>(newEmployee, "employees");
+            restServ.Put<Employee>(newEmployee, "employee");
             Console.WriteLine($"Successfuly updated {id}");
             Console.ReadKey();
         }
@@ -186,11 +190,40 @@ namespace GVC31G_HFT_2021221
         {
             Console.WriteLine("Id of the soon to be deleted employee");
             int id = int.Parse(Console.ReadLine());
-            restServ.Delete(id, "employees");
+            restServ.Delete(id, "employee");
             Console.WriteLine("Successfuly deleted the item");
             Console.ReadKey();
         }
-        
+        static void ListEmployeeWithLatestAssignment()
+        {
+            Console.WriteLine("The employee with the latest assignment is");
+            var res = restServ.GetSingle<string>("stat/EmployeeWithLatestAssignment");
+            Console.WriteLine(res);
+            Console.ReadKey();
+        }
+        static void ListEmployeeWithLongestAssignmentDescription()
+        {
+            Console.WriteLine("The employee with the latest assignment is");
+            var res = restServ.GetSingle<string>("stat/getEmployeeLongestAssignmentDescription");
+            Console.WriteLine(res);
+            Console.ReadKey();
+        }
+        static void ListAllEmployeesWithTheirManager()
+        {
+            var res = restServ.Get<SelectAllEmp>("stat/ListAllEmployeesWithTheirManagers");
+            res.ForEach(x => Console.WriteLine($" manager name: {x.managerName},emp name: {x.name} "));
+            Console.ReadKey();
+        }
+        static void ListEmployeesMergedwithTheirManagers()
+        {
+            var res = restServ.Get<SelectEmpCount>("stat/ListAllEmployeesWithTheirManagers");
+            res.ForEach(x => Console.WriteLine($"{x.managerName}, {x.count}"));
+            Console.ReadKey();
+        }
+        static void ListMostAssignments()
+        {
+            var res = restServ.GetSingle<string>("stat/MostAssignments");
+        }
 
     }
 }
