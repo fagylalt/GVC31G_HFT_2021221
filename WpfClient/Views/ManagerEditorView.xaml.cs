@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfClient
+namespace WpfClient.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ManagerEditorView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ManagerEditorView : Window
     {
-        public MainWindow()
+        public ManagerEditorView()
         {
             InitializeComponent();
         }
