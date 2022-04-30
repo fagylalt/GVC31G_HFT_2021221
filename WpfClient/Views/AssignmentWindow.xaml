@@ -4,23 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfClient.Views"
+        xmlns:mvms="clr-namespace:WpfClient.ViewModels"
         mc:Ignorable="d"
-        Title="AssignmentWindow" Height="450" Width="800">
+        Title="Assignments" Height="450" Width="800">
+    <Window.DataContext>
+        <mvms:AssignmentWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0">
-            
+        <ListBox ItemsSource="{Binding Assignments}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Description}" Foreground="Black" FontSize="14"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Grid.Column="1" Orientation="Vertical">
-            <ListBox>
-                
-            </ListBox>
-            <Button Content="Create Assignment" x:Name="btn_create" Click="btn_create_Click"></Button>
-            <Button Content="Update Assignment" x:Name="btn_update" Click="btn_update_Click"></Button>
-            <Button Content="Delete Assignment" x:Name="btn_delete" Click="btn_delete_Click"></Button>
-        </StackPanel>
     </Grid>
 </Window>

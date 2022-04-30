@@ -9,19 +9,6 @@ namespace WpfClient.ViewModels
 {
     public class MainWindowViewModel: ObservableRecipient
     {
-        private ObservableRecipient selectedViewModel;
-
-        public ObservableRecipient SelectedViewModel
-        {
-            get { return selectedViewModel; }
-            set
-            {
-                if (value != null)
-                {
-                    selectedViewModel = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+       
     }
 }

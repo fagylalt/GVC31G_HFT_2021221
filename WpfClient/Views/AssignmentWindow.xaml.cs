@@ -23,20 +23,5 @@ namespace WpfClient.Views
         {
             InitializeComponent();
         }
-
-        private void btn_delete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_update_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_create_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
