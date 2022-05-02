@@ -54,7 +54,6 @@ function display() {
 
 
 function remove(id) {
-    alert(id);
     fetch('http://localhost:51716/employee/' + id, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json', },
