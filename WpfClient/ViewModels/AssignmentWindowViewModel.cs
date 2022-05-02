@@ -16,34 +16,32 @@ namespace WpfClient.ViewModels
         public RestCollection<Assignment> Assignments { get; set; }
         public AssignmentWindowViewModel()
         {
+            ;
             if (!IsInDesignMode)
             {
-                ;
-
                 Assignments = new RestCollection<Assignment>("http://localhost:51716/", "assignment");
-                ;
             }
         }
         private Assignment selectedAssignment;
-        //public Assignment SelectedAssignment
-        //{
-        //    get { return selectedAssignment; }
-        //    set
-        //    {
-        //        if (value != null)
-        //        {
-        //            selectedAssignment = new Assignment()
-        //            {
-        //                Id = value.Id,
-        //                Description = value.Description,
-        //                dueDate = value.dueDate,
-        //                EmployeeId = value.EmployeeId
-        //            };
-        //            OnPropertyChanged();
-        //            //(DeleteActorCommand as RelayCommand).NotifyCanExecuteChanged();
-        //        }
-        //    }
-        //}
+        public Assignment SelectedAssignment
+        {
+            get { return selectedAssignment; }
+            set
+            {
+                if (value != null)
+                {
+                    selectedAssignment = new Assignment()
+                    {
+                        Id = value.Id,
+                        Description = value.Description,
+                        dueDate = value.dueDate,
+                        EmployeeId = value.EmployeeId
+                    };
+                    OnPropertyChanged();
+                    //(DeleteActorCommand as RelayCommand).NotifyCanExecuteChanged();
+                }
+            }
+        }
         public static bool IsInDesignMode
         {
             get

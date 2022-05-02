@@ -4,18 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfClient.Views"
+        xmlns:mvms="clr-namespace:WpfClient.ViewModels"
         mc:Ignorable="d"
         Title="ManagerWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <mvms:ManagerViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0">
-
+        <ListBox ItemsSource="{Binding Managers}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}" Foreground="Black" FontSize="14"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Grid.Column="1">
-
-        </StackPanel>
     </Grid>
 </Window>

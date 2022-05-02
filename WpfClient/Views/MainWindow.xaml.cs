@@ -30,14 +30,12 @@ namespace WpfClient
         {
             AssignmentWindow aWindow = new AssignmentWindow();
             aWindow.Show();
-            this.Close();
         }
 
         private void btn_employee_Click(object sender, RoutedEventArgs e)
         {
             EmployeeWindow eWindow = new EmployeeWindow();
             eWindow.Show();
-            this.Close();
 
         }
 
@@ -45,7 +43,6 @@ namespace WpfClient
         {
             ManagerWindow mWindow = new ManagerWindow();
             mWindow.Show();
-            this.Close();
         }
     }
 }
