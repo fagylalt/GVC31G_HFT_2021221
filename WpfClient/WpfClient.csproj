@@ -17,8 +17,4 @@
     <ProjectReference Include="..\GVC31G_HFT_2021221.Models\GVC31G_HFT_2021221.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
-
 </Project>

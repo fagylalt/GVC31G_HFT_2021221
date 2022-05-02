@@ -16,10 +16,8 @@ namespace WpfClient.ViewModels
         public RestCollection<Employee> Employees { get; set; }
         public EmployeeWindowViewModel()
         {
-            ;
             if (!IsInDesignMode)
             {
-                ;
                 Employees = new RestCollection<Employee>("http://localhost:51716/", "employee");
             }
         }

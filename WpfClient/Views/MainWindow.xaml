@@ -10,12 +10,11 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1">
-            <Button Content="Assignment related tasks" Click="btn_assignment_Click" Margin="10,10,10,10"></Button>
-            <Button Content="Employee related tasks" Click="btn_employee_Click" Margin="10,10,10,10"></Button>
-            <Button x:Name="btn_manager" Click="btn_manager_Click"  Content="Manager related tasks" Margin="10,10,10,10"></Button>
+        <StackPanel>
+            <Button Padding="10" Content="Assignment related tasks" Click="btn_assignment_Click" Margin="50,50,50,25"></Button>
+            <Button Padding="10" Content="Employee related tasks" Click="btn_employee_Click" Margin="50,25,50,25"></Button>
+            <Button Padding="10" x:Name="btn_manager" Click="btn_manager_Click"  Content="Manager related tasks" Margin="50,25,50,25"></Button>
         </StackPanel>
     </Grid>
     
