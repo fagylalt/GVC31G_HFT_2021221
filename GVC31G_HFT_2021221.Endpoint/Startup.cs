@@ -1,4 +1,5 @@
 using GVC31G_HFT_2021221.Data;
+using GVC31G_HFT_2021221.Endpoint.Services;
 using GVC31G_HFT_2021221.Logic;
 using GVC31G_HFT_2021221.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -27,22 +28,32 @@ namespace GVC31G_HFT_2021221.Endpoint
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<IAssignmentRepository, AssignmentRepository>();
             services.AddTransient<TrainDbContext, TrainDbContext>();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(x => x
+            .AllowCredentials()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .WithOrigins("http://localhost:48118"));
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
+            
         }
     }
 }

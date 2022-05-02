@@ -1,7 +1,9 @@
-﻿using GVC31G_HFT_2021221.Logic;
+﻿using GVC31G_HFT_2021221.Endpoint.Services;
+using GVC31G_HFT_2021221.Logic;
 using GVC31G_HFT_2021221.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +16,11 @@ namespace GVC31G_HFT_2021221.Endpoint.Controllers
     public class ManagerController : ControllerBase
     {
         IManagerLogic logic;
-        public ManagerController(IManagerLogic ManagerLogic)
+        IHubContext<SignalRHub> hub;
+        public ManagerController(IManagerLogic ManagerLogic, IHubContext<SignalRHub> hub)
         {
             logic = ManagerLogic;
+            this.hub = hub;
         }
 
         [HttpGet]
@@ -34,6 +38,7 @@ namespace GVC31G_HFT_2021221.Endpoint.Controllers
         public void Post([FromBody] Manager value)
         {
             logic.Create(value);
+            this.hub.Clients.All.SendAsync("ManagerCreated", value);
         }
         [HttpPut]
 
@@ -41,11 +46,14 @@ namespace GVC31G_HFT_2021221.Endpoint.Controllers
         {
             ;
             logic.Update(value);
+            this.hub.Clients.All.SendAsync("ManagerUpdated", value);
         }
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var managerToDelete = logic.Read(id);
             logic.Delete(id);
+            this.hub.Clients.All.SendAsync("ManagerDeleted", managerToDelete);
         }
     }
 }

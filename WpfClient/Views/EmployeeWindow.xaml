@@ -15,12 +15,23 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox ItemsSource="{Binding Employees}">
+        <ListBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee }">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" Foreground="Black" FontSize="14"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel Grid.Column="1">
+            <Label Padding="5" Content="Employee's ID"/>
+            <Label Background="Gray" Margin="0,10,0,0" Padding="5" Content="{Binding SelectedEmployee.Id}"/>
+            <Label Padding="5" Content="Employee's name"/>
+            <TextBox Background="Gray" Margin="0,10,0,0" Padding="5" Text="{Binding SelectedEmployee.Name}"/>
+            <Label Padding="5" Content="Employee's manager id"/>
+            <TextBox Background="Gray" Margin="0,10,0,0" Padding="5" Text="{Binding SelectedEmployee.ManagerId}"/>
+            <Button Margin="5" Padding="10" Content="Create Employee" Command="{Binding CreateEmployeeCommand}"/>
+            <Button Margin="5" Padding="10" Content="Update Employee" Command="{Binding UpdateEmployeeCommand}"/>
+            <Button Margin="5" Padding="10" Content="Delete Employee" Command="{Binding DeleteEmployeeCommand}"/>
+        </StackPanel>
     </Grid>
 </Window>

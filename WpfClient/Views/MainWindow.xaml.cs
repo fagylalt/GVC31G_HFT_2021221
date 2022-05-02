@@ -29,20 +29,20 @@ namespace WpfClient
         private void btn_assignment_Click(object sender, RoutedEventArgs e)
         {
             AssignmentWindow aWindow = new AssignmentWindow();
-            aWindow.Show();
+            aWindow.ShowDialog();
         }
 
         private void btn_employee_Click(object sender, RoutedEventArgs e)
         {
             EmployeeWindow eWindow = new EmployeeWindow();
-            eWindow.Show();
+            eWindow.ShowDialog();
 
         }
 
         private void btn_manager_Click(object sender, RoutedEventArgs e)
         {
             ManagerWindow mWindow = new ManagerWindow();
-            mWindow.Show();
+            mWindow.ShowDialog();
         }
     }
 }

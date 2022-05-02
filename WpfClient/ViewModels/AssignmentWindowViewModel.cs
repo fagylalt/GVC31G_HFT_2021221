@@ -19,10 +19,10 @@ namespace WpfClient.ViewModels
         public RestCollection<Assignment> Assignments { get; set; }
         public AssignmentWindowViewModel()
         {
-            ;
+            selectedAssignment = new Assignment();
             if (!IsInDesignMode)
             {
-                Assignments = new RestCollection<Assignment>("http://localhost:51716/", "assignment");
+                Assignments = new RestCollection<Assignment>("http://localhost:51716/", "assignment", "hub");
             }
             CreateAssignmentCommand = new RelayCommand(() =>
             {
@@ -52,7 +52,6 @@ namespace WpfClient.ViewModels
             {
                 return selectedAssignment != null;
             });
-            selectedAssignment = new Assignment();
         }
         private Assignment selectedAssignment;
         public Assignment SelectedAssignment
@@ -78,7 +77,6 @@ namespace WpfClient.ViewModels
         public ICommand CreateAssignmentCommand { get; set; }
         public ICommand DeleteAssignmentCommand { get; set; }
         public ICommand UpdateAssignmentCommand { get; set; }
-        public ICommand ClearFieldsCommand { get; set; }
         public static bool IsInDesignMode
         {
             get
