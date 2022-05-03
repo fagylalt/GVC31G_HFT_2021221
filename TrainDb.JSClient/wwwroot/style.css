@@ -22,11 +22,7 @@ th, td {
 th {
     background-color: lightblue;
 }
-#updateformdiv {
-    display:none;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
+
 #formdiv {
     display: flex;
     flex-direction: column;

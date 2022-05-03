@@ -3,8 +3,6 @@ let connection = null;
 getdata();
 setupSignalR();
 
-let employeeIdToUpdate = -1;
-
 function setupSignalR() {
     connection = new signalR.HubConnectionBuilder()
         .withUrl("http://localhost:51716/hub")
@@ -16,9 +14,6 @@ function setupSignalR() {
     });
 
     connection.on("EmployeeDeleted", (user, message) => {
-        getdata();
-    });
-    connection.on("EmployeeUpdated", (user, message) => {
         getdata();
     });
 
@@ -52,16 +47,11 @@ function display() {
     Employees.forEach(t => {
         document.getElementById('resultarea').innerHTML +=
             "<tr><td>" + t.id + "</td><td>" + t.name + "</td><td>"
-        + t.managerId + "</td><td>" + `<button type="button" onclick="remove(${t.id})">Delete</button>` + `<button type="button" onclick="showupdate(${t.id})">Update</button>`+ "</td></tr>";
+        + t.managerId + "</td><td>" + `<button type="button" onclick="remove(${t.id})">Delete</button>` + "</td></tr>";
     });
 }
 
-function showupdate(id) {
-    document.getElementById('nametoupdate').value = Employees.find(t => t['id'] == id)['name'];
-    document.getElementById('manageridtoupdate').value = Employees.find(t => t['id'] == id)['managerId'];
-    document.getElementById('updateformdiv').style.display = 'flex';
-    employeeToUpdate = id;
-}
+
 
 function remove(id) {
     fetch('http://localhost:51716/employee/' + id, {
@@ -88,27 +78,6 @@ function create() {
         headers: { 'Content-Type': 'application/json', },
         body: JSON.stringify(
             {Name: _name, managerId: _managerid }),
-    })
-        .then(response => response)
-        .then(data => {
-            console.log('Success:', data);
-            getdata();
-        })
-        .catch((error) => { console.error('Error:', error); });
-}
-function update() {
-    document.getElementById('updateformdiv').style.display = "none";
-    alert(document.getElementById('nametoupdate').value);
-    let _name = document.getElementById('nametoupdate').value;
-    console.log(name);
-    let _managerid = document.getElementById('manageridtoupdate').value;
-    console.log(managerid);
-
-    fetch('http://localhost:51716/employee', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', },
-        body: JSON.stringify(
-            { id: employeeToUpdate, name: _name, managerId: _managerid}),
     })
         .then(response => response)
         .then(data => {
