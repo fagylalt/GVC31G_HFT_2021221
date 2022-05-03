@@ -28,6 +28,11 @@ th {
     flex-direction: column;
     margin-bottom: 20px;
 }
+#updateformdiv {
+    flex-direction: column;
+    margin-bottom: 20px;
+    display:none;
+}
 
     #formdiv label, button, input {
         margin: 5px;
