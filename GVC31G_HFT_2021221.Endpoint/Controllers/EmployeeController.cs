@@ -53,7 +53,7 @@ namespace GVC31G_HFT_2021221.Endpoint.Controllers
         {
             var employeeToDelete = logic.Read(id);
             logic.Delete(id);
-            this.hub.Clients.All.SendAsync("AssignmentCreated", employeeToDelete);
+            this.hub.Clients.All.SendAsync("EmployeeDeleted", employeeToDelete);
         }
 
     }
